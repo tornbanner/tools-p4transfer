@@ -1,0 +1,79 @@
+# counter_name: The counter is stored on the target p4. Keep a unique name containing the depot to transfer to keep track of them.
+counter_name: p4transfer_counter_devtools
+
+# case_sensitive: We keep that to true to avoid any issues with case sensitivity
+case_sensitive: true
+historical_start_change:
+
+instance_name: Perforce Transfer from DevTools to Zombie
+
+# We can keep the mail notifications blank
+mail_form_url:
+mail_to:
+mail_from:
+mail_server:
+
+sleep_on_error_interval: 60
+poll_interval: 60
+change_batch_size: 1000
+report_interval: 30
+error_report_interval: 15
+summary_report_interval: 7 * 24 * 60
+sync_progress_size_interval: 500 * 1000 * 1000
+max_logfile_size: 20 * 1024 * 1024
+
+# change_description_format: Important to avoid skip \ as they are messing with the messages
+change_description_format: "$sourceDescription\\n\\nTransferred from p4://$sourcePort@$sourceChange"
+
+change_map_file:
+superuser: y
+ignore_files:
+
+source:
+  p4port: perforce:1666
+  p4user: build
+  p4client: p4-transfer-client
+  #Enter the right pw
+  p4passwd: xxx
+  p4charset:
+
+target:
+  p4port: perforce:1690
+  p4user: build
+  p4client: p4-transfer-client
+  # Enter the right pw
+  p4passwd: xxx
+  p4charset:
+
+workspace_root: D:\\p4transfer\
+
+# views: For general purpose we can directly use stream_views instead.
+#views:
+#- src: //devtools/main/...
+#  targ: //devtools/main/...
+#- src: -//devtools/main/WPFTools/...
+#  targ: //devtools/main/WPFTools/...
+#- src: -//devtools/main/SubmitHelperTest.txt
+#  targ: //devtools/main/SubmitHelperTest.txt
+
+# transfer_target_stream: Use the depot/transfer. Later on that's a very lightweight stream that we could delete if needed
+transfer_target_stream: //devtools/transfer
+
+# stream_views: Make sure to specify the right types and parents
+stream_views:
+- src: //devtools/main
+  targ: //devtools/main
+  type: mainline
+  parent: ''
+#- src: //streams_src/main
+#  targ: //streams_targ/main
+#  type: mainline
+#  parent: ''
+#- src: //streams_src2/release*
+#  targ: //streams_targ2/rel*
+#  type: mainline
+#  parent: //streams_targ2/main
+#- src: //src3_streams/*rel*
+#  targ: //targ3_streams/*release*
+#  type: mainline
+#  parent: //targ3_streams/main

@@ -1,11 +1,11 @@
 # counter_name: The counter is stored on the target p4. Keep a unique name containing the depot to transfer to keep track of them.
-counter_name: p4transfer_counter
+counter_name: p4transfer_counter_corretto
 
 # case_sensitive: We keep that to true to avoid any issues with case sensitivity
 case_sensitive: true
 historical_start_change:
 
-instance_name: Perforce Transfer from Corretto to Zombie
+instance_name: Perforce Transfer from Corretto to Zombie P4
 
 # We can keep the mail notifications blank
 mail_form_url:
@@ -32,7 +32,7 @@ ignore_files:
 source:
   p4port: perforce:1666
   p4user: build
-  p4client: p4-transfer-client
+  p4client: p4-transfer-client-Corretto
   #Enter the right pw
   p4passwd: xxx
   p4charset:
@@ -40,12 +40,12 @@ source:
 target:
   p4port: perforce:1690
   p4user: build
-  p4client: p4-transfer-client
+  p4client: p4-transfer-client-Corretto
   # Enter the right pw
   p4passwd: xxx
   p4charset:
 
-workspace_root: D:\\p4transfer\
+workspace_root: B:\\p4transfer\Corretto
 
 # views: For general purpose we can directly use stream_views instead.
 #views:
@@ -57,23 +57,27 @@ workspace_root: D:\\p4transfer\
 #  targ: //devtools/main/SubmitHelperTest.txt
 
 # transfer_target_stream: Use the depot/transfer. Later on that's a very lightweight stream that we could delete if needed
-transfer_target_stream: //devtools/transfer
+transfer_target_stream: //Corretto/transfer
 
 # stream_views: Make sure to specify the right types and parents
 stream_views:
-- src: //devtools/main
-  targ: //devtools/main
+- src: //Corretto/main
+  targ: //Corretto/main
   type: mainline
   parent: ''
-#- src: //streams_src/main
-#  targ: //streams_targ/main
+#- src: //Corretto/Dev-Binaries
+#  targ: //Corretto/Dev-Binaries
 #  type: mainline
 #  parent: ''
-#- src: //streams_src2/release*
-#  targ: //streams_targ2/rel*
-#  type: mainline
-#  parent: //streams_targ2/main
-#- src: //src3_streams/*rel*
-#  targ: //targ3_streams/*release*
-#  type: mainline
-#  parent: //targ3_streams/main
+- src: //Corretto/Dev-GameplayAbilitySystem
+  targ: //Corretto/Dev-GameplayAbilitySystem
+  type: development
+  parent: //Corretto/Dev-EngineUpgrade
+- src: //Corretto/Dev-EngineUpgrade
+  targ: //Corretto/main
+  type: development
+  parent: //Corretto/main
+- src: //Corretto/Dev-Chivalry2-Merge
+  targ: //Corretto/Dev-Chivalry2-Merge
+  type: development
+  parent: //Corretto/main
