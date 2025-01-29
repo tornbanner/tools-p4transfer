@@ -85,7 +85,8 @@ max_logfile_size: 20 * 1024 * 1024
 # change_description_format: The standard format for transferred changes.
 #    Keywords prefixed with $. Use \\n for newlines. Keywords allowed:
 #     $sourceDescription, $sourceChange, $sourcePort, $sourceUser
-change_description_format: \"$sourceDescription\\n\\nTransferred from p4://$sourcePort@$sourceChange\"
+# TBS: Fix to avoid weird EOL issues
+change_description_format: "$sourceDescription\\n\\nTransferred from p4://$sourcePort@$sourceChange"
 
 # change_map_file: Name of an (optional) CSV file listing mappings of source/target changelists.
 #    If this is blank (DEFAULT) then no mapping file is created.

@@ -966,6 +966,8 @@ class P4Base(object):
         clientspec._root = self.root
         clientspec["Options"] = clientspec["Options"].replace("noclobber", "clobber")
         clientspec["Options"] = clientspec["Options"].replace("normdir", "rmdir")
+        # TBS: Force the client to allow submitting unchanged files
+        clientspec["SubmitOptions"] = "submitunchanged"
         clientspec["LineEnd"] = "unix"
         clientspec._view = []
         # We create/update our special target stream, and also create any required target streams that don't exist
